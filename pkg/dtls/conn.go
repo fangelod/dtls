@@ -263,6 +263,7 @@ func (c *Conn) internalSend(pkt *recordLayer, shouldEncrypt bool) {
 }
 
 func (c *Conn) handleIncoming(buf []byte) error {
+	fmt.Printf("dtls.handleIncoming: %v\n", buf)
 	pkts, err := unpackDatagram(buf)
 	if err != nil {
 		return err
@@ -278,6 +279,7 @@ func (c *Conn) handleIncoming(buf []byte) error {
 }
 
 func (c *Conn) handleIncomingPacket(buf []byte) error {
+	fmt.Printf("dtls.handleIncomingPacket: %v\n", buf)
 	// TODO: avoid separate unmarshal
 	h := &recordLayerHeader{}
 	if err := h.Unmarshal(buf); err != nil {
